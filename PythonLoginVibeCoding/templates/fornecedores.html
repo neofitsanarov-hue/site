@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<title>Fornecedores</title>
+
+<style>
+
+body{
+    font-family:Segoe UI;
+    background:#0f172a;
+    color:white;
+    padding:30px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.card{
+    background:#1e293b;
+    padding:25px;
+    border-radius:15px;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:#334155;
+    color:white;
+}
+
+button{
+    margin-top:15px;
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#334155;
+    padding:15px;
+}
+
+td{
+    padding:15px;
+    border-bottom:1px solid #334155;
+}
+
+a{
+    color:white;
+    text-decoration:none;
+}
+
+.voltar{
+    display:inline-block;
+    margin-top:20px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>Cadastrar Fornecedor</h1>
+
+        <form action="/cadastrar_fornecedor" method="POST">
+
+            <input name="nome" placeholder="Nome" required>
+            <input name="cnpj" placeholder="CNPJ" required>
+            <input name="telefone" placeholder="Telefone">
+            <input name="email" placeholder="Email">
+            <input name="endereco" placeholder="Endereço">
+            <input name="cidade" placeholder="Cidade">
+            <input name="estado" placeholder="Estado">
+
+            <button type="submit">Salvar</button>
+
+        </form>
+
+    </div>
+
+    <div class="card">
+
+        <h1>Buscar Fornecedor</h1>
+
+        <form method="GET" action="/fornecedores">
+
+            <input name="busca" placeholder="Nome ou CNPJ">
+
+            <button type="submit">Buscar</button>
+
+        </form>
+
+    </div>
+
+    <div class="card">
+
+        <h1>Lista de Fornecedores</h1>
+
+        <table>
+
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>CNPJ</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+            </tr>
+
+            {% for f in fornecedores %}
+
+            <tr>
+                <td>{{ f[0] }}</td>
+                <td>{{ f[1] }}</td>
+                <td>{{ f[2] }}</td>
+                <td>{{ f[3] }}</td>
+                <td>{{ f[4] }}</td>
+                <td>{{ f[6] }}</td>
+                <td>{{ f[7] }}</td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+    <a class="voltar" href="/painel">
+        ← Voltar
+    </a>
+
+</div>
+
+</body>
+</html>

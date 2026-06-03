@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Produtos</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    padding:30px;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+}
+
+.card{
+    background:#1e293b;
+    padding:25px;
+    border-radius:15px;
+    margin-bottom:20px;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    margin-top:10px;
+    background:#334155;
+    color:white;
+}
+
+button{
+    margin-top:15px;
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background:#2563eb;
+    color:white;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.buscar{
+    display:flex;
+    gap:10px;
+}
+
+.buscar input{
+    flex:1;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#334155;
+    padding:15px;
+}
+
+td{
+    padding:15px;
+    border-bottom:1px solid #334155;
+}
+
+.editar{
+    background:#16a34a;
+    color:white;
+    padding:8px 12px;
+    border-radius:8px;
+    text-decoration:none;
+}
+
+.excluir{
+    background:#dc2626;
+    color:white;
+    padding:8px 12px;
+    border-radius:8px;
+    text-decoration:none;
+}
+
+.voltar{
+    display:inline-block;
+    margin-top:20px;
+    color:white;
+    text-decoration:none;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>Cadastrar Produto</h1>
+
+        <form action="/cadastrar_produto" method="POST">
+
+            <input
+                type="text"
+                name="nome"
+                placeholder="Nome do Produto"
+                required
+            >
+
+            <input
+                type="text"
+                name="codigo"
+                placeholder="Código"
+                required
+            >
+
+            <input
+                type="text"
+                name="categoria"
+                placeholder="Categoria"
+                required
+            >
+
+            <input
+                type="text"
+                name="fornecedor"
+                placeholder="Fornecedor"
+                required
+            >
+
+            <input
+                type="number"
+                step="0.01"
+                name="preco_compra"
+                placeholder="Preço de Compra"
+                required
+            >
+
+            <input
+                type="number"
+                step="0.01"
+                name="preco_venda"
+                placeholder="Preço de Venda"
+                required
+            >
+
+            <input
+                type="number"
+                name="quantidade"
+                placeholder="Quantidade"
+                required
+            >
+
+            <input
+                type="number"
+                name="estoque_minimo"
+                placeholder="Estoque Mínimo"
+                required
+            >
+
+            <button type="submit">
+                Salvar Produto
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="card">
+
+        <h1>Buscar Produto</h1>
+
+        <form method="GET" action="/produtos">
+
+            <div class="buscar">
+
+                <input
+                    type="text"
+                    name="busca"
+                    placeholder="Digite nome, código ou categoria"
+                >
+
+                <button type="submit">
+                    Buscar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="card">
+
+        <h1>Produtos Cadastrados</h1>
+
+        <table>
+
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Código</th>
+                <th>Categoria</th>
+                <th>Fornecedor</th>
+                <th>Compra</th>
+                <th>Venda</th>
+                <th>Qtd</th>
+                <th>Mínimo</th>
+                <th>Ações</th>
+            </tr>
+
+            {% for produto in produtos %}
+
+            <tr>
+
+                <td>{{ produto[0] }}</td>
+                <td>{{ produto[1] }}</td>
+                <td>{{ produto[2] }}</td>
+                <td>{{ produto[3] }}</td>
+                <td>{{ produto[4] }}</td>
+                <td>R$ {{ produto[5] }}</td>
+                <td>R$ {{ produto[6] }}</td>
+                <td>{{ produto[7] }}</td>
+                <td>{{ produto[8] }}</td>
+
+                <td>
+
+                    <a
+                        class="editar"
+                        href="/editar_produto/{{ produto[0] }}"
+                    >
+                        Editar
+                    </a>
+
+                    <a
+                        class="excluir"
+                        href="/excluir_produto/{{ produto[0] }}"
+                        onclick="return confirm('Excluir produto?')"
+                    >
+                        Excluir
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+    <a class="voltar" href="/painel">
+        ← Voltar ao Painel
+    </a>
+
+</div>
+
+</body>
+</html>

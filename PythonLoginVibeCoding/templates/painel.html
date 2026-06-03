@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Painel Administrativo</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    display:flex;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:260px;
+    height:100vh;
+    background:#1e293b;
+    padding:20px;
+    position:fixed;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.menu a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:12px;
+    margin-bottom:8px;
+    border-radius:8px;
+    transition:0.2s;
+}
+
+.menu a:hover{
+    background:#2563eb;
+}
+
+/* CONTEÚDO */
+
+.main{
+    margin-left:260px;
+    width:100%;
+    padding:30px;
+}
+
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.user{
+    background:#1e293b;
+    padding:10px 15px;
+    border-radius:8px;
+}
+
+/* CARDS */
+
+.cards{
+    margin-top:30px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+}
+
+.card h2{
+    font-size:28px;
+}
+
+.card p{
+    color:#cbd5e1;
+}
+
+/* BOTÕES */
+
+.actions{
+    margin-top:30px;
+}
+
+.btn{
+    display:inline-block;
+    padding:12px 18px;
+    background:#2563eb;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    margin-right:10px;
+    margin-top:10px;
+}
+
+.btn:hover{
+    background:#1d4ed8;
+}
+
+/* RESUMO */
+
+.summary{
+    margin-top:30px;
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        SISTEMA ERP
+    </div>
+
+    <div class="menu">
+
+        <a href="/painel">Dashboard</a>
+        <a href="/produtos">Produtos</a>
+        <a href="/fornecedores">Fornecedores</a>
+        <a href="/estoque">Estoque</a>
+        <a href="/usuarios">Usuários</a>
+        <a href="/logout">Sair</a>
+
+    </div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <div class="top">
+
+        <h1>Bem-vindo, {{ nome }}</h1>
+
+        <div class="user">
+            Online
+        </div>
+
+    </div>
+
+    <!-- CARDS PRINCIPAIS -->
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>{{ total_produtos }}</h2>
+            <p>Produtos</p>
+        </div>
+
+        <div class="card">
+            <h2>{{ estoque_baixo }}</h2>
+            <p>Estoque Baixo</p>
+        </div>
+
+        <div class="card">
+            <h2>R$ {{ "%.2f"|format(valor_estoque) }}</h2>
+            <p>Valor do Estoque</p>
+        </div>
+
+        <div class="card">
+            <h2>{{ ultimo_produto }}</h2>
+            <p>Último Produto</p>
+        </div>
+
+    </div>
+
+    <!-- AÇÕES RÁPIDAS -->
+
+    <div class="actions">
+
+        <a class="btn" href="/produtos">Gerenciar Produtos</a>
+        <a class="btn" href="/fornecedores">Gerenciar Fornecedores</a>
+        <a class="btn" href="/estoque">Controle de Estoque</a>
+        <a class="btn" href="/usuarios">Usuários</a>
+
+    </div>
+
+    <!-- RESUMO DO SISTEMA -->
+
+    <div class="summary">
+
+        <h2>Resumo do Sistema</h2>
+        <br>
+
+        <p>Total de produtos: <b>{{ total_produtos }}</b></p>
+        <p>Estoque baixo: <b>{{ estoque_baixo }}</b></p>
+        <p>Último produto: <b>{{ ultimo_produto }}</b></p>
+        <p>Valor total do estoque: <b>R$ {{ "%.2f"|format(valor_estoque) }}</b></p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

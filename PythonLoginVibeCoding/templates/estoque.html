@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<title>Estoque</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    padding:30px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.card{
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+input, select{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:#334155;
+    color:white;
+}
+
+button{
+    margin-top:10px;
+    padding:10px 15px;
+    background:#2563eb;
+    border:none;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+th, td{
+    padding:12px;
+    border-bottom:1px solid #334155;
+    text-align:left;
+}
+
+a{
+    color:white;
+    text-decoration:none;
+}
+
+.voltar{
+    display:inline-block;
+    margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Controle de Estoque</h1>
+
+<!-- ENTRADA -->
+
+<div class="card">
+
+    <h2>Entrada de Estoque</h2>
+
+    <form action="/entrada_estoque" method="POST">
+
+        <select name="produto_id" required>
+
+            {% for p in produtos %}
+                <option value="{{ p[0] }}">{{ p[1] }}</option>
+            {% endfor %}
+
+        </select>
+
+        <input type="number" name="quantidade" placeholder="Quantidade" required>
+
+        <button type="submit">Adicionar</button>
+
+    </form>
+
+</div>
+
+<!-- SAÍDA -->
+
+<div class="card">
+
+    <h2>Saída de Estoque</h2>
+
+    <form action="/saida_estoque" method="POST">
+
+        <select name="produto_id">
+
+            {% for p in produtos %}
+                <option value="{{ p[0] }}">{{ p[1] }}</option>
+            {% endfor %}
+
+        </select>
+
+        <input type="number" name="quantidade" placeholder="Quantidade" required>
+
+        <button type="submit">Remover</button>
+
+    </form>
+
+</div>
+
+<!-- HISTÓRICO -->
+
+<div class="card">
+
+    <h2>Histórico de Movimentações</h2>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Produto</th>
+            <th>Tipo</th>
+            <th>Quantidade</th>
+            <th>Data</th>
+        </tr>
+
+        {% for m in movimentacoes %}
+
+        <tr>
+            <td>{{ m[0] }}</td>
+            <td>{{ m[1] }}</td>
+            <td>{{ m[2] }}</td>
+            <td>{{ m[3] }}</td>
+            <td>{{ m[4] }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+<a class="voltar" href="/painel">← Voltar ao Painel</a>
+
+</div>
+
+</body>
+</html>

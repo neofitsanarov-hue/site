@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Editar Produto</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
+
+.container{
+    width:100%;
+    max-width:800px;
+}
+
+.card{
+    background:#1e293b;
+    padding:30px;
+    border-radius:15px;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:12px;
+    border:none;
+    border-radius:8px;
+    background:#334155;
+    color:white;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.voltar{
+    display:inline-block;
+    margin-top:20px;
+    color:white;
+    text-decoration:none;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>Editar Produto</h1>
+
+        <form
+            action="/atualizar_produto/{{ produto[0] }}"
+            method="POST"
+        >
+
+            <input
+                type="text"
+                name="nome"
+                value="{{ produto[1] }}"
+                required
+            >
+
+            <input
+                type="text"
+                name="codigo"
+                value="{{ produto[2] }}"
+                required
+            >
+
+            <input
+                type="text"
+                name="categoria"
+                value="{{ produto[3] }}"
+                required
+            >
+
+            <input
+                type="text"
+                name="fornecedor"
+                value="{{ produto[4] }}"
+                required
+            >
+
+            <input
+                type="number"
+                step="0.01"
+                name="preco_compra"
+                value="{{ produto[5] }}"
+                required
+            >
+
+            <input
+                type="number"
+                step="0.01"
+                name="preco_venda"
+                value="{{ produto[6] }}"
+                required
+            >
+
+            <input
+                type="number"
+                name="quantidade"
+                value="{{ produto[7] }}"
+                required
+            >
+
+            <input
+                type="number"
+                name="estoque_minimo"
+                value="{{ produto[8] }}"
+                required
+            >
+
+            <button type="submit">
+                Salvar Alterações
+            </button>
+
+        </form>
+
+        <a
+            class="voltar"
+            href="/produtos"
+        >
+            ← Voltar para Produtos
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
